@@ -1,0 +1,9 @@
+{
+  "id": "ImFeelingLucky",
+  "name": "I'm Feeling Lucky",
+  "author": ["denneyl"],
+  "description": "Random Deck, Random Stake!",
+  "prefix": "imfeelinglucky",
+  "main_file": "main.lua",
+  "version": "1.0.0"
+}
