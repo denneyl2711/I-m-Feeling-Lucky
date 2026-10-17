@@ -1,3 +1,7 @@
+assert(SMODS.load_file("ui.lua"))()
+
+G.LUCKY = {}
+
 G.FUNCS.im_feeling_lucky = function(e)
     local unlocked_decks = {}
     for k, v in pairs(G.P_CENTERS) do
@@ -21,18 +25,9 @@ G.FUNCS.im_feeling_lucky = function(e)
 
     --need to set the back as a global constant but pass the stake in as an argument...
     --thunk, why did you do this???
-    G.GAME.selected_back = Back(deck)
+    G.GAME.viewed_back:change_to(deck)
     G.FUNCS.start_run(e, {stake = stake})
 end
-
-
-G.UIDEF.im_feeling_lucky_setup_option = function()
-    return
-    {n=G.UIT.ROOT, config={align = "cm", colour = G.C.CLEAR, minh = 6.6, minw = 6}, nodes={
-        UIBox_button{id = 'imfeelinglucky', button = "im_feeling_lucky", colour = G.C.BLUE, minw = 3.65, minh = 1.55, label = {"I'm Feeling Lucky!!"}, scale = 0.90, col = true}
-    }}
-end
-
 
 get_unlocked_stakes = function(back)
     --look up the back in the profiles table
