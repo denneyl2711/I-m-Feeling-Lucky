@@ -25,11 +25,20 @@ G.FUNCS.im_feeling_lucky = function(e)
     G.FUNCS.start_run(e, {stake = stake})
 end
 
+
+G.UIDEF.im_feeling_lucky_setup_option = function()
+    return
+    {n=G.UIT.ROOT, config={align = "cm", colour = G.C.CLEAR, minh = 6.6, minw = 6}, nodes={
+        UIBox_button{id = 'imfeelinglucky', button = "im_feeling_lucky", colour = G.C.BLUE, minw = 3.65, minh = 1.55, label = {"I'm Feeling Lucky!!"}, scale = 0.90, col = true}
+    }}
+end
+
+
 get_unlocked_stakes = function(back)
     --look up the back in the profiles table
-    deck_info = G.PROFILES[G.SETTINGS.profile].deck_usage[back.key]
+    deck_info = G.PROFILES[G.SETTINGS.profile].deck_usage[back.key] or {}
     stakes = {}
-    for key, _ in pairs(deck_info.wins_by_key) do
+    for key, _ in pairs(deck_info.wins_by_key or {}) do
         table.insert(stakes, key)
     end
 

@@ -2,36 +2,24 @@
 version = "1.0.0"
 dump = false
 
+# create the I'm Feeling Lucky tab in the New Run panel
 [[patches]]
 [patches.pattern]
 target = "functions/UI_definitions.lua"
-pattern = "UIBox_button{id = 'main_menu_play', button = not G.SETTINGS.tutorial_complete and \"start_run\" or \"setup_run\", colour = G.C.BLUE, minw = 3.65, minh = 1.55, label = {localize('b_play_cap')}, scale = text_scale*2, col = true},"
+pattern = '''
+G.STAGE == G.STAGES.MAIN_MENU and {
+label = localize('b_challenges'),
+tab_definition_function = G.UIDEF.challenges,
+tab_definition_function_args = from_game_over,
+chosen = _challenge_chosen
+} or nil,
+'''
 position = "after"
 match_indent = true
 
-#TODO(denneyl): would be nice to have this in a place where we have intellisense
-# also this just looks bad UI-wise
 payload = '''
 {
-    n = G.UIT.R,
-    config = { align = "cm", padding = 0.1 },
-    nodes = {
-        {
-            n = G.UIT.C,
-            config = {
-                align = "cm",
-                minw = 2.5,
-                minh = 0.8,
-                r = 0.1,
-                padding = 0.1,
-                button = "im_feeling_lucky",
-                colour = G.C.BLUE,
-                shadow = true
-            },
-            nodes = {
-                { n = G.UIT.T, config = { text = "I'm Feeling Lucky!", scale = 0.4, colour = G.C.WHITE } }
-            }
-        }
-    }
+    label = "I'm Feeling Lucky!",
+    tab_definition_function = G.UIDEF.im_feeling_lucky_setup_option,
 },
 '''
