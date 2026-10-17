@@ -7,19 +7,39 @@ dump = false
 [patches.pattern]
 target = "functions/UI_definitions.lua"
 pattern = '''
+} or {
+  label = localize('b_challenges'),
+  tab_definition_function = G.UIDEF.challenges,
+  tab_definition_function_args = from_game_over,
+  chosen = _challenge_chosen
+},
 G.STAGE == G.STAGES.MAIN_MENU and {
-label = localize('b_challenges'),
-tab_definition_function = G.UIDEF.challenges,
-tab_definition_function_args = from_game_over,
-chosen = _challenge_chosen
+  label = localize('b_challenges'),
+  tab_definition_function = G.UIDEF.challenges,
+  tab_definition_function_args = from_game_over,
+  chosen = _challenge_chosen
 } or nil,
 '''
-position = "after"
+position = "at"
 match_indent = true
-
 payload = '''
-{
+} or {
+  label = localize('b_challenges'),
+  tab_definition_function = G.UIDEF.challenges,
+  tab_definition_function_args = from_game_over,
+  chosen = _challenge_chosen
+},
+G.STAGE == G.STAGES.MAIN_MENU and {
+  label = localize('b_challenges'),
+  tab_definition_function = G.UIDEF.challenges,
+  tab_definition_function_args = from_game_over,
+  chosen = _challenge_chosen
+} or {
     label = "I'm Feeling Lucky!",
     tab_definition_function = G.UIDEF.im_feeling_lucky_setup_option,
 },
+G.STAGE == G.STAGES.MAIN_MENU and {
+    label = "I'm Feeling Lucky!",
+    tab_definition_function = G.UIDEF.im_feeling_lucky_setup_option,
+} or nil,
 '''
